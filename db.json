@@ -1,0 +1,41 @@
+{
+  "board": {
+    "name": "Mock Board",
+    "columns": [
+      {
+        "name": "Ideas",
+        "tasks": [
+          "Idea 1",
+          "Idea 2",
+          "Idea 3",
+          "aaaaa",
+          "bbb"
+        ]
+      },
+      {
+        "name": "Research",
+        "tasks": [
+          "Topic 1",
+          "Topic 2",
+          "Topic 3"
+        ]
+      },
+      {
+        "name": "Todo",
+        "tasks": [
+          "Task 1",
+          "Task 2",
+          "Task 3"
+        ]
+      },
+      {
+        "name": "Done",
+        "tasks": [
+          "Completed Task 1",
+          "Completed Task 2",
+          "Completed Task 3"
+        ]
+      }
+    ]
+  }
+}
