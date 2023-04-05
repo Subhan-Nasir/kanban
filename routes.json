@@ -1,0 +1,9 @@
+{
+    "/api/*": "/$1",
+    "/:resource/:id/show": "/:resource/:id",
+    "/posts/:author": "/posts?author=:author",
+    "/articles\\?id=:id": "/posts/:id",
+
+
+    "/boards/search/name": "/boards/?name=:boardName"
+}

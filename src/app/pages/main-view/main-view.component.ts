@@ -14,11 +14,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MainViewComponent implements OnInit{
 
-  col1: Column = { name: "Ideas", tasks: ["Task 11","Task 11","Task 11"]}
-  col2: Column = { name: "Research", tasks: ["Task 11","Task 11","Task 11"]}
-  col3: Column = { name: "Todo", tasks: ["Task 11","Task 11","Task 11"]}
-  col4: Column = { name: "Done", tasks: ["Task 11","Task 11","Task 11"]}
-  dummyBoard: Board = {name: "dummy board", columns: [this.col1, this.col2, this.col3, this.col4]}
+  col1: Column = { id: 11, name: "Ideas", tasks: ["Task 11","Task 11","Task 11"]}
+  col2: Column = { id: 12, name: "Research", tasks: ["Task 11","Task 11","Task 11"]}
+  col3: Column = { id: 13, name: "Todo", tasks: ["Task 11","Task 11","Task 11"]}
+  col4: Column = { id: 14, name: "Done", tasks: ["Task 11","Task 11","Task 11"]}
+  dummyBoard: Board = {id: 10, name: "dummy board", columns: [this.col1, this.col2, this.col3, this.col4]}
 
   // board: BoardClass | Record<string, never> = {};
   board: Board | Record<string, never> = {};
@@ -32,42 +32,65 @@ export class MainViewComponent implements OnInit{
 
   taskFrom: FormGroup;
   taskName: string = "";
-  taskCategory: string = "";
+  taskCategory: string[] = [];
+
+  categoryList = ["type 1", "type 2","type 3","type 4"];
 
   constructor(private formBuilder: FormBuilder, private boardService: BoardService, ){
     this.taskFrom = formBuilder.group({
       "taskName": [null, Validators.required],
-      "taskCategory": [null, Validators.required] 
+      "taskCategory": [1] 
     })
   }
 
-  ngOnInit(): void {
-    this.boardService.getBoard().subscribe((ApiBoard) => (this.board = ApiBoard));
-    this.boardService.getName().subscribe((boardName) => (console.log(boardName)));
 
-    // console.log(this.board.name)
+  ngOnInit(): void {
+    this.boardService.getBoard(1).subscribe((ApiBoard) => (this.board = ApiBoard));
     
     console.log("Board should be initialised");
     
   }
 
+  
+  updateDatabase(){
+    this.boardService.updateBoard(this.board).subscribe((res) => (this.board = res));
+  }
+  
+
   addTask(task:any){
+    console.log(task.taskCategory)
     
     this.board.columns.forEach(col => {
-      if(col.name.replace(/ /g, "").toLowerCase() === task.taskCategory.replace(/ /g, "").toLowerCase()){
+      if(col.name === task.taskCategory){
         col.tasks.push(task.taskName);
       }
       
     })
-    this.boardService.addItem(this.board).subscribe((res) => (this.board = res));
 
     
-    console.log("Board should have new item added");
+    
+    // this.boardService.updateBoard(this.board).subscribe((res) => (this.board = res));
+    this.updateDatabase();
+    
+    
     
     
 
 
   }
+
+  deleteTask(columnID: number, task:string){
+    console.log(`Column ID: ${columnID}, task "${task}" marked for deletion`);
+    this.board.columns.forEach(col => {
+      if(col.id === columnID){
+        col.tasks = col.tasks.filter(item => item != task);
+      }
+      
+    });
+    // this.boardService.updateBoard(this.board).subscribe((res) => (this.board = res));
+    this.updateDatabase();
+  }
+
 
 
 
@@ -82,6 +105,10 @@ export class MainViewComponent implements OnInit{
         event.currentIndex,
       );
     }
+    console.log(this.board);
+    // this.boardService.updateBoard(this.board).subscribe((res) => (this.board = res));
+    this.updateDatabase();
+
   }
 
 }

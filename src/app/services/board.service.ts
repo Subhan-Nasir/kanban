@@ -33,23 +33,27 @@ const httpOptions = {
 
 
 export class BoardService {
-  private apiUrl = "http://localhost:3000/board";
+  private apiUrl = "http://localhost:3000/boards";
 
   constructor(private http:HttpClient) { }
 
-  getBoard(): Observable<Board>{
+  getBoard(id:number): Observable<Board>{
     
 
-    return this.http.get<Board>(this.apiUrl);
+    return this.http.get<Board>("http://localhost:3000/boards/1");
   }
 
-  getName(): Observable<string>{
-    return this.http.get<string>(this.apiUrl + "/name");
-  }
+  // getName(): Observable<string>{
+  //   return this.http.get<string>(this.apiUrl + "/name");
+  // }
 
-  addItem(item:any): Observable<Board>{
-    return this.http.post<Board>(this.apiUrl, item, httpOptions);
+  // addItem(item:any): Observable<Board>{
+  //   return this.http.post<Board>(this.apiUrl, item, httpOptions);
 
+  // }
+
+  updateBoard(updatedBoard:any): Observable<Board>{
+    return this.http.put<Board>(this.apiUrl + `/${updatedBoard.id}`, updatedBoard, httpOptions);
   }
 
 }

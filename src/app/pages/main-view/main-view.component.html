@@ -7,18 +7,22 @@
         </div>
     </div>
 
-    <div class="board">
-        <div class="board-bar">
-            <p class="board-name">Board Name</p>
-        </div>
+    <div class="board"  >
+        <!-- <div class="board-bar">
+            <p class="board-name">Board Name: {{board.name}}</p>
+        </div> -->
 
-        <div>
+        <div class="task-form-wrapper">
             <form [formGroup]="taskFrom" (ngSubmit)="addTask(taskFrom.value)">
                 <div class="form-container">
-                    <label for="taskName">New Task</label>
-                    <input type="text" formControlName="taskName">
-                    <input type="text" formControlName="taskCategory" placeholder="Category">
-                    <input type="submit" value="Submit Form" [disabled]="!taskFrom.valid">
+                    <label class="task-name-label" for="taskName">Add New Task</label>
+                    <input class="form-control" type="text" formControlName="taskName" placeholder="Task Name">
+                    <!-- <input type="text" formControlName="taskCategory" placeholder="Category"> -->
+                    <select class="form-select" formControlName="taskCategory">
+                        <option> -- Select category -- </option>
+                        <option *ngFor="let column of board.columns" >{{column.name}}</option>
+                    </select>
+                    <input class="btn submit-button" type="submit" value="Submit" [disabled]="!taskFrom.valid">
                 </div>
 
             </form>
@@ -27,9 +31,10 @@
         </div>
 
         
-
-
+        
+        <div class="board-name">{{board.name}}</div>
         <div class="board-wrapper">
+            
             <div class="board-columns" cdkDropListGroup>
                 <div class="board-column" *ngFor="let column of board.columns">                                     
                 
@@ -43,7 +48,14 @@
                         (cdkDropListDropped)="drop($event)" 
                     >
                         <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-                            {{item}}
+                            <div class="task-text">{{item}}</div>
+                            <button class="task-delete-button btn btn-outline-danger" (click)="deleteTask(column.id, item)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                  </svg>
+                                
+                            </button>
                         </div>
                         
                     </div>

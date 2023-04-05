@@ -1,41 +1,93 @@
 {
-  "board": {
-    "name": "Mock Board",
-    "columns": [
-      {
-        "name": "Ideas",
-        "tasks": [
-          "Idea 1",
-          "Idea 2",
-          "Idea 3",
-          "aaaaa",
-          "bbb"
-        ]
-      },
-      {
-        "name": "Research",
-        "tasks": [
-          "Topic 1",
-          "Topic 2",
-          "Topic 3"
-        ]
-      },
-      {
-        "name": "Todo",
-        "tasks": [
-          "Task 1",
-          "Task 2",
-          "Task 3"
-        ]
-      },
-      {
-        "name": "Done",
-        "tasks": [
-          "Completed Task 1",
-          "Completed Task 2",
-          "Completed Task 3"
-        ]
-      }
-    ]
+  "boards": [
+    {
+      "id": 1,
+      "name": "Mock Board",
+      "columns": [
+        {
+          "id": 1,
+          "name": "Ideas",
+          "tasks": [
+            "Idea 1",
+            "Idea 2",
+            "Idea 3"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Research",
+          "tasks": [
+            "Topic 1",
+            "Topic 2",
+            "Topic 3"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Todo",
+          "tasks": [
+            "Task 1",
+            "Task 2",
+            "Task 3"
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Done",
+          "tasks": [
+            "Completed Task 1",
+            "Completed Task 3",
+            "Completed Task 2"
+          ]
+        }
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": 4,
+      "title": "json-server 4",
+      "author": "typicode"
+    },
+    {
+      "id": 3,
+      "title": "json-server 3",
+      "author": "fakeauthor"
+    },
+    {
+      "id": 2,
+      "title": "json-server 2",
+      "author": "john smith"
+    },
+    {
+      "id": 1,
+      "title": "json-server 1",
+      "author": "noauthor"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment 1",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "some comment 2",
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "body": "some comment 3",
+      "postId": 1
+    },
+    {
+      "id": 4,
+      "body": "some comment 4",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
 }
