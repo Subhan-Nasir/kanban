@@ -5,7 +5,14 @@
     
 }
 
+.navbar{
+    background-color: #264653;
+}
 
+.app-name {
+    color: white;
+    margin-left: 45px;
+}
 
 .app-name {
     font-size: 28px;
@@ -31,7 +38,7 @@
     min-width: 0;
 
     .board-name {
-        margin-left: 75px;
+        // margin-left: 75px;
         font-weight: bold;
         font-family: 'Lato', sans-serif;
         font-size: 26px;
@@ -162,58 +169,111 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.task-form-wrapper {
-    padding-top: 25px;
-    padding-left: 50px;
-    // background-color: red;
-    max-width: 100%;
+
+
+.submit-button {
+    background-color: var(--teal);
+    
+    color: white;
+}
+
+.submit-button:hover, .submit-button:focus {
+    background-color: var(--raisin_black);
+}
+
+.submit-button:active {
+    background-color: darkblue;
+    color: white;
+}
+
+.submit-button:disabled {
+    border: none;
+}
+
+.modal-close-button {
+    background-color: red;
+    color: white;
+}
+
+.modal-close-button:hover, .modal-close-button:focus {
+    background-color: var(--carmine)
+}
+
+.modal-close-button:active{
+    background-color: darkred;
+    color: white;
+}
+
+
+.modal-x-button {
+    background-color: transparent;
+    border: none;
+
+    height: 2.5em;
+    width: 2.5em;
+
+    border-radius: 50%;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-
-    .form-container {
-        display: grid;
-        grid-template-columns: 1.62fr 1.62fr  1fr;
-
-        flex-wrap: wrap;
-        gap: 10px;
-
-        max-width: 6    00px;
-        
-
+    align-items: center;
     
-
-    }
     
+}
+.modal-x-button svg path {
+    stroke: black;
+    stroke-width: 0.5;
+}
+.modal-x-button:active svg path {
+    stroke: white;
+    
+}
 
-    .task-name-label{
-        
-        // background-color: yellow;
-        text-align: center;
-        grid-column: span 3;
+.modal-x-button:hover, .modal-x-button:focus {
+    background-color: lightgray;
+}
 
-        border-bottom: 2px solid black;
-
-    }
-
-    .submit-button {
-        background-color: var(--teal);
-        
-        color: white;
-    }
-
-    .submit-button:hover, .submit-button:focus {
-        background-color: var(--raisin_black);
-    }
-
-    .submit-button:active {
-        background-color: var(--carmine);
-    }
-
-    .submit-button:disabled {
-        border: none;
-    }
+.modal-x-button:active {
+    background-color: red;
+    color: white;
+}
 
 
+.add-task {
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+    // background-color: red;
+    margin-left: 50px;
+    margin-top: 40px;
 
 }
+
+.add-task span {
+    margin-right: 0.5em;
+}
+
+.add-task svg {
+    background-color: lightgray;
+    border-radius: 50%;
+}
+
+.add-task:hover svg, .add-task:focus svg {
+    background-color: var(--teal);
+       
+}
+
+.add-task:hover svg path, .add-task:focus svg path {
+    stroke: white;
+       
+}
+
+.add-task svg path{
+    stroke: black;
+    stroke-width: 1;
+
+    
+
+   
+
+}
+

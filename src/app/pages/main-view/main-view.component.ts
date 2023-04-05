@@ -5,7 +5,9 @@ import { Board } from '../../Board';
 import { Column } from '../../Column';
 import { BoardService } from '../../services/board.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+declare var window:any;
 
 @Component({
   selector: 'app-main-view',
@@ -24,33 +26,47 @@ export class MainViewComponent implements OnInit{
   board: Board | Record<string, never> = {};
   // board: Board = this.dummyBoard;
   
-  
-  
-
-  
-  
-
   taskFrom: FormGroup;
   taskName: string = "";
   taskCategory: string[] = [];
 
+  
   categoryList = ["type 1", "type 2","type 3","type 4"];
 
-  constructor(private formBuilder: FormBuilder, private boardService: BoardService, ){
+  closeResult:string = ""; 
+
+  formModal: any;
+
+  constructor(
+    private formBuilder: FormBuilder, 
+    private boardService: BoardService, 
+    private modalService: NgbModal){
+
     this.taskFrom = formBuilder.group({
       "taskName": [null, Validators.required],
-      "taskCategory": [1] 
+      "taskCategory": [1, Validators.minLength(2)] 
     })
+
   }
 
 
   ngOnInit(): void {
     this.boardService.getBoard(1).subscribe((ApiBoard) => (this.board = ApiBoard));
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById("addTaskModal")
+    );
     
     console.log("Board should be initialised");
     
   }
 
+  openModal(){
+    this.formModal.show();
+  }
+
+  closeModal(){
+    this.formModal.hide();
+  }
   
   updateDatabase(){
     this.boardService.updateBoard(this.board).subscribe((res) => (this.board = res));
@@ -110,5 +126,7 @@ export class MainViewComponent implements OnInit{
     this.updateDatabase();
 
   }
+
+  
 
 }

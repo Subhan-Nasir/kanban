@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MainViewComponent } from './pages/main-view/main-view.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -24,6 +25,7 @@ import { MainViewComponent } from './pages/main-view/main-view.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
 
     
   ],
