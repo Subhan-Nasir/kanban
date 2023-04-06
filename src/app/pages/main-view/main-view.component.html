@@ -3,7 +3,7 @@
         <div class="navbar-brand">
             <div class="navbar-item">
                 <h1 class="app-name">Kanban</h1>
-            </div>  
+            </div>
         </div>
     </div>
 
@@ -32,23 +32,40 @@
 
 
 
-        <div class="board-name">
-            <div type = "button" class="add-task" (click)="openModal()">
+        <div class="add-item-container">
+            <div type="button" class="add-item add-task" (click)="openModal(taskFrom)">
                 <!-- Plus icon -->
                 <span>Add Task</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
             </div>
+
+            <div type="button" class="add-item add-column" (click)="openModal(columnForm)">
+                <!-- Plus icon -->
+                <span>Add Column</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </div>
+
         </div>
 
         <div class="board-wrapper">
 
             <div class="board-columns" cdkDropListGroup>
+
+
+
                 <div class="board-column" *ngFor="let column of board.columns">
 
                     <div class="column-title">
                         {{column.name}}
+                        <button (click)="showDeleteDialog(column)" class="btn btn-danger">Delete</button>
                     </div>
 
                     <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks"
@@ -87,41 +104,72 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
-                <button type="btn" (click)="closeModal()" class="close modal-x-button" data-dismiss="modal" aria-label="Close">
+                <button type="btn" (click)="closeModal()" class="close modal-x-button" data-dismiss="modal"
+                    aria-label="Close">
 
                     <!-- X icon for top right close button -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
                 </button>
             </div>
-            <form [formGroup]="taskFrom" (ngSubmit)="addTask(taskFrom.value)">
-
-                <div class="modal-body">
-                    
-                    
-
-                        <input class="form-control" type="text" formControlName="taskName" placeholder="Task Name">
-
-                        <select class="form-select" formControlName="taskCategory">
-                            <option> -- Select category -- </option>
-                            <option *ngFor="let column of board.columns">{{column.name}}</option>
-                        </select>
-                        
-                        
-
-                    
+            <ng-template [ngIf]="taskFormOpen">
+                <form [formGroup]="taskFrom" class="task-form" (ngSubmit)="addTask(taskFrom.value)">
 
 
-                    
+                    <div class="modal-body">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" (click)="closeModal()" class="btn modal-close-button" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                    <input (click)="closeModal()" class="btn submit-button" type="submit" value="Submit" [disabled]="!taskFrom.valid">
-                </div>
-        </form>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" formControlName="taskName" placeholder="Task Name">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-select" formControlName="taskCategory">
+                                <option> -- Select category -- </option>
+                                <option *ngFor="let column of board.columns">{{column.name}}</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" (click)="closeModal()" class="btn modal-close-button"
+                            data-dismiss="modal">Close</button>
+
+                        <input class="btn submit-button" type="submit" value="Submit"
+                            [disabled]="!taskFrom.valid && taskCategory !== null">
+                    </div>
+                </form>
+            </ng-template>
+
+            <ng-template [ngIf]="columnFormOpen">
+                <form [formGroup]="columnForm" class="column-form" (ngSubmit)="addColumn(columnForm.value)">
+
+
+                    <div class="modal-body">
+
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" formControlName="newColumnName"
+                                placeholder="Column Name">
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" (click)="closeModal()" class="btn modal-close-button"
+                            data-dismiss="modal">Close</button>
+
+                        <input class="btn submit-button" type="submit" value="Submit" [disabled]="!columnForm.valid">
+                    </div>
+                </form>
+            </ng-template>
+
         </div>
     </div>
 </div>

@@ -1,0 +1,71 @@
+
+.modal-close-button {
+    background-color: red;
+    color: white;
+}
+
+.modal-close-button:hover, .modal-close-button:focus {
+    background-color: var(--carmine)
+}
+
+.modal-close-button:active{
+    background-color: darkred;
+    color: white;
+}
+
+
+.modal-x-button {
+    background-color: transparent;
+    border: none;
+
+    height: 2.5em;
+    width: 2.5em;
+
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.modal-x-button svg path {
+    stroke: black;
+    stroke-width: 0.5;
+}
+.modal-x-button:active svg path {
+    stroke: white;
+    
+}
+
+.modal-x-button:hover, .modal-x-button:focus {
+    background-color: lightgray;
+}
+
+.modal-x-button:active {
+    background-color: red;
+    color: white;
+}
+
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    // .form-control, .form-select {
+    //     padding-left: 20px;
+    //     padding-right: 20px;
+
+    //     margin-left: 20px;
+    //     margin-right: 20px;
+
+    //     max-width: 80%;
+    // }
+
+    .form-group {
+        width: 80%;
+        
+    }
+}

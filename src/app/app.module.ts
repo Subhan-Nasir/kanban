@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MainViewComponent } from './pages/main-view/main-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './pages/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './services/confirmation-dialog.service';
 
 
 
@@ -16,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     MainViewComponent,
+    ConfirmationDialogComponent,
     
   ],
   imports: [
@@ -26,10 +29,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    
 
     
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ConfirmationDialogService],
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class AppModule { }

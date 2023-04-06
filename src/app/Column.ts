@@ -1,5 +1,8 @@
+
+
+
 export interface Column {
-    id: number
+    id: number;
     name: string;
     tasks: string[];
 
